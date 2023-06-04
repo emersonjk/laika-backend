@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateClientesTable extends Migration
+class CreatePetRacasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,12 +13,12 @@ class CreateClientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('clientes', function (Blueprint $table) {
+        Schema::create('pet_racas', function (Blueprint $table) {
             $table->id();
+            $table->unsignedBigInteger('especie_id');
+            $table->foreign('especie_id')->references('id')->on('pet_especies');
             $table->string('nome');
-            $table->string('telefone');
-            $table->string('cpf');
-            $table->string('email');
+            $table->string('extra');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -31,6 +31,11 @@ class CreateClientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('clientes');
+        Schema::table('pet_racas', function (Blueprint $table) {
+            $table->dropForeign(['especie_id']);
+            $table->dropColumn('especie_id');
+        });
+
+        Schema::dropIfExists('pet_racas');
     }
 }

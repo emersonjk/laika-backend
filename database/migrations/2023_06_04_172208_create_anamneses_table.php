@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreateAnamenesesTable extends Migration
+class CreateAnamnesesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,7 +13,7 @@ class CreateAnamenesesTable extends Migration
      */
     public function up()
     {
-        Schema::create('anameneses', function (Blueprint $table) {
+        Schema::create('anamneses', function (Blueprint $table) {
             $table->id();
             $table->integer('pet_id');
             $table->string('motivo');
@@ -36,6 +36,6 @@ class CreateAnamenesesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('anameneses');
+        Schema::dropIfExists('anamneses');
     }
 }

@@ -4,7 +4,7 @@ use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
 
-class CreatePetientesTable extends Migration
+class CreateSintomasTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,16 +13,10 @@ class CreatePetientesTable extends Migration
      */
     public function up()
     {
-        Schema::create('petientes', function (Blueprint $table) {
+        Schema::create('sintomas', function (Blueprint $table) {
             $table->id();
-            $table->bigInteger('dono_id');
-            $table->string('nome');
-            $table->string('raca');
-            $table->string('especie');
-            $table->string('porte');
-            $table->string('peso');
-            $table->string('sexo');
-            $table->date('nascimento');
+            $table->string("nome");
+            $table->string("extra");
             $table->timestamps();
             $table->softDeletes();
         });
@@ -35,6 +29,6 @@ class CreatePetientesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('petientes');
+        Schema::dropIfExists('sintomas');
     }
 }

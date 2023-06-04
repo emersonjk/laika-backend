@@ -6,7 +6,7 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Cliente extends Model
+class Dono extends Model
 {
     use HasFactory;
     use SoftDeletes;
@@ -20,6 +20,6 @@ class Cliente extends Model
 
     public function pets()
     {
-        return $this->hasMany(Petiente::class, 'cliente_id');
+        return $this->hasMany(Petiente::class, 'dono_id');
     }
 }

@@ -12,7 +12,7 @@ class Petiente extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'cliente_id',
+        'dono_id',
         'nome',
         'raca',
         'especies',
@@ -28,7 +28,7 @@ class Petiente extends Model
 
     public function dono()
     {
-        return $this->belongsTo(Cliente::class, 'cliente_id');
+        return $this->belongsTo(Dono::class, 'dono_id');
     }
 
 }
