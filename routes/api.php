@@ -24,4 +24,5 @@ Route::prefix('anamnese')->name('anamnese.')->group(function () {
     $api_controller = AnamneseController::class;
     Route::get('',[$api_controller, 'index'])->name('index');
     Route::post('detalhe',[$api_controller, 'detalhe'])->name('detalhe');
+    Route::post('cadastra',[$api_controller, 'cadastra'])->name('cadastra');
 });

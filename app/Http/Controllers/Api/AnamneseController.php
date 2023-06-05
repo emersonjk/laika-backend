@@ -61,6 +61,7 @@ class AnamneseController extends Controller
 
     public function cadastra(Request $request)
     {
+        dd($request);
         try {
 
         }catch (\Throwable $th){
