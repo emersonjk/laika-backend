@@ -14,6 +14,15 @@ class PetienteResource extends JsonResource
      */
     public function toArray($request)
     {
-        return parent::toArray($request);
+        return [
+            'id' => $this->id,
+            'cliente_id' => $this->cliente_id,
+            'nome_pet' => $this->nome_pet,
+            'idade_pet' => $this->idade_pet,
+            'peso' => $this->peso,
+            'especie' => $this->especie,
+            'raca' => $this->raca,
+            'sexo' => $this->sexo,
+        ];
     }
 }

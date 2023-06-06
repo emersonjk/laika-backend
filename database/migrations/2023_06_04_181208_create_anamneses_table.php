@@ -15,15 +15,16 @@ class CreateAnamnesesTable extends Migration
     {
         Schema::create('anamneses', function (Blueprint $table) {
             $table->id();
-            $table->integer('pet_id');
+            $table->unsignedBigInteger('pet_id');
+            $table->foreign('pet_id')->references('id')->on('petientes');
             $table->string('motivo');
             $table->string('sintomas');
             $table->string('cirurgias_ant');
             $table->text('doencas_prev');
             $table->string('med_em_uso');
             $table->text('comport_pet');
-            $table->integer('repro_recente');
-            $table->integer('viagem');
+            $table->string('repro_recente');
+            $table->string('viagem');
             $table->timestamps();
             $table->softDeletes();
         });
@@ -36,6 +37,10 @@ class CreateAnamnesesTable extends Migration
      */
     public function down()
     {
+        Schema::table('anamneses',function (Blueprint $table) {
+            $table->dropForeign(['pet_id']);
+            $table->dropColumn('pet_id');
+        });
         Schema::dropIfExists('anamneses');
     }
 }

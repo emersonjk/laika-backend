@@ -3,32 +3,31 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\AnamneseResource;
-use App\Http\Resources\ListaAnamneseResource;
-use App\Models\Anamnese;
+use App\Http\Resources\ClienteListaResource;
+use App\Http\Resources\ClienteResource;
+use App\Models\Cliente;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
-class AnamneseController extends Controller
+class ClientesController extends Controller
 {
-    public function index($id)
+    public function index()
     {
         try {
 
-            $anamneses = Anamnese::where('pet_id',$id)->with('pet.cliente')->get();
+            $clientes = Cliente::with('pet')->get();
 
-            dd($anamneses, 'comportamento: [\'estressado\',\'Nucio\']');
-            if (is_object($anamneses)) {
+            if (is_object($clientes)) {
                 return response()->json([
                     'error' => false,
                     'message' => 'Sem erros',
-                    'results' => ['anamneses' => ListaAnamneseResource::collection($anamneses)],
+                    'results' => ['Clientes' => ClienteListaResource::collection($clientes)],
                 ], 200);
             }else{
                 return response()->json([
                     'error' => false,
                     'message' => 'Sem erros',
-                    'results' => ['anamneses' => 'Sem Anamneses Anteriores'],
+                    'results' => ['Clientes' => '0 Clientes Cadastrados'],
                 ], 200);
             }
 
@@ -37,7 +36,7 @@ class AnamneseController extends Controller
             dd($th);
             return response()->json([
                 'error' => true,
-                'message' => 'Erro ao listar as anamneses!',
+                'message' => 'Erro ao listar os Clientes!',
                 'erro_results' => $th->getMessage(),
             ], 500);
         }
@@ -48,12 +47,12 @@ class AnamneseController extends Controller
 
         try {
 
-            $anamnese = Anamnese::where('id',$id)->get();
+            $cliente = Cliente::with('pet')->where('id',$id)->get();
 
             return response()->json([
                 'error' => false,
                 'message' => 'Sem erros',
-                'results' => ['anamnese' => AnamneseResource::collection($anamnese)],
+                'results' => ['Cliente' => ClienteListaResource::collection($cliente)],
             ], 200);
 
         }catch (\Throwable $th){
@@ -61,7 +60,7 @@ class AnamneseController extends Controller
             dd($th);
             return response()->json([
                 'error' => true,
-                'message' => 'Erro ao listar a anamnese!',
+                'message' => 'Erro ao listar os Clientes!',
                 'erro_results' => $th->getMessage(),
             ], 500);
         }
@@ -70,38 +69,7 @@ class AnamneseController extends Controller
     public function cadastra(Request $request)
     {
         $input = $request->all();
+
         dd($request,$input);
-        try {
-
-        }catch (\Throwable $th){
-
-        }
-    }
-
-    public function edita(Request $request)
-    {
-        try {
-
-        }catch (\Throwable $th){
-
-        }
-    }
-
-    public function update(Request $request)
-    {
-        try {
-
-        }catch (\Throwable $th){
-
-        }
-    }
-
-    public function delete(Request $request)
-    {
-        try {
-
-        }catch (\Throwable $th){
-
-        }
     }
 }

@@ -6,20 +6,23 @@ use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\SoftDeletes;
 
-class Dono extends Model
+class Cliente extends Model
 {
     use HasFactory;
     use SoftDeletes;
 
     protected $fillable = [
-        'nome',
-        'telefone',
-        'cpf',
-        'email',
+        'nome_tutor',
+        'cpf_tutor',
+        'email_tutor',
+        'telefone_tutor',
+        'cidade',
+        'cep',
+        'casa'
     ];
 
-    public function pets()
+    public function pet()
     {
-        return $this->hasMany(Petiente::class, 'dono_id');
+        return $this->hasOne(Petiente::class, 'cliente_id');
     }
 }

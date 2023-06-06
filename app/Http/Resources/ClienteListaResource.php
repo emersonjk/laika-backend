@@ -4,7 +4,7 @@ namespace App\Http\Resources;
 
 use Illuminate\Http\Resources\Json\JsonResource;
 
-class ClienteResource extends JsonResource
+class ClienteListaResource extends JsonResource
 {
     /**
      * Transform the resource into an array.
@@ -23,6 +23,7 @@ class ClienteResource extends JsonResource
             'cidade' => $this->cidade,
             'cep' => $this->cep,
             'casa' => $this->casa,
+            'pet' => $this->pet != null ? PetienteResource::collection([$this->pet]) : 'sem pet cadastrado',
         ];
     }
 }

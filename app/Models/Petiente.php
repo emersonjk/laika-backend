@@ -12,13 +12,13 @@ class Petiente extends Model
     use SoftDeletes;
 
     protected $fillable = [
-        'dono_id',
-        'nome',
+        'cliente_id',
+        'nome_pet',
+        'idade_pet',
+        'peso',
+        'especie',
         'raca',
-        'especies',
-        'porte',
         'sexo',
-        'nascimento',
     ];
 
     public function anamnese()
@@ -26,9 +26,9 @@ class Petiente extends Model
         return $this->hasMany(Anamnese::class,'pet_id');
     }
 
-    public function dono()
+    public function cliente()
     {
-        return $this->belongsTo(Dono::class, 'dono_id');
+        return $this->belongsTo(Cliente::class, 'cliente_id');
     }
 
 }
