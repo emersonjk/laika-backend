@@ -13,8 +13,8 @@ class Petiente extends Model
 
     protected $fillable = [
         'cliente_id',
-        'nome_pet',
-        'idade_pet',
+        'nome',
+        'idade',
         'peso',
         'especie',
         'raca',

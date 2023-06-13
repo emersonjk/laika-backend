@@ -17,8 +17,8 @@ class CreatePetientesTable extends Migration
             $table->id();
             $table->unsignedBigInteger('cliente_id');
             $table->foreign('cliente_id')->references('id')->on('clientes');
-            $table->string('nome_pet');
-            $table->string('idade_pet');
+            $table->string('nome');
+            $table->string('idade');
             $table->string('peso');
             $table->string('especie');
             $table->string('raca');

@@ -16,9 +16,8 @@ class PetienteResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'cliente_id' => $this->cliente_id,
-            'nome_pet' => $this->nome_pet,
-            'idade_pet' => $this->idade_pet,
+            'nome' => $this->nome,
+            'idade' => $this->idade,
             'peso' => $this->peso,
             'especie' => $this->especie,
             'raca' => $this->raca,

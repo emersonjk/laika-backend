@@ -16,14 +16,14 @@ class ClienteListaResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'nome_tutor'=> $this->nome_tutor,
-            'cpf_tutor' => $this->cpf_tutor,
-            'email_tutor' => $this->email_tutor,
-            'telefone_tutor' => $this->telefone_tutor,
+            'nome'=> $this->nome,
+            'cpf' => $this->cpf,
+            'email' => $this->email,
+            'telefone' => $this->telefone,
             'cidade' => $this->cidade,
             'cep' => $this->cep,
             'casa' => $this->casa,
-            'pet' => $this->pet != null ? PetienteResource::collection([$this->pet]) : 'sem pet cadastrado',
+            'pet' => PetienteResource::collection([$this->pet]),
         ];
     }
 }

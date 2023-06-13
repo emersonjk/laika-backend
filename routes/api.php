@@ -23,20 +23,21 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 
 
 //Clientes
-Route::prefix('cliente')->name('clientes.')->group(function () {
-    $api_controller = ClientesController::class;
-    Route::get('',[$api_controller, 'index'])->name('index'); // listar os clientes
-    Route::get('/{id}',[$api_controller, 'detalhe'])->name('detalhe'); // Detalhe dos clientes
-    Route::post('/cadastro',[$api_controller, 'cadastra'])->name('cadastra');
+$cliente_controller = ClientesController::class;
+Route::get('users',[$cliente_controller, 'index'])->name('index'); // pega todos os clientes
+Route::post('users',[$cliente_controller, 'cadastra'])->name('cadastra'); // Cadastra os clientes
+Route::get('/users/{id}',[$cliente_controller, 'detalhe'])->name('detalhe'); // Detalhe de cliente
+Route::get('/users/delete/{id}',[$cliente_controller, 'delete'])->name('delete'); // deleta cliente e pet
+// Route::post('/anamneses/pets/{pet_id}/anamneses',[$cliente_controller, 'cadastra'])->name('cadastra');
 
     //Anamnese
-    Route::prefix('/anamnese')->name('anamnese.')->group(function () {
+    Route::prefix('/anamneses')->name('anamnese.')->group(function () {
         $api_controller = AnamneseController::class;
-        Route::get('/{id}',[$api_controller, 'index'])->name('index'); //lista as anamneses
+        Route::get('/pets/{id}/anamneses',[$api_controller, 'index'])->name('index'); //lista anamneses dos pets
         Route::post('/{id}/cadastra',[$api_controller, 'cadastra'])->name('cadastra'); // Cadastra as anamneses
         Route::get('/{id}/detalhe',[$api_controller, 'detalhe'])->name('detalhe'); // abre a anamnese
     });
-});
+
 
 //Petientes
 /*Route::prefix('pet')->name('clientes.')->group(function () {
