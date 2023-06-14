@@ -30,13 +30,12 @@ Route::get('/users/{id}',[$cliente_controller, 'detalhe'])->name('detalhe'); // 
 Route::get('/users/delete/{id}',[$cliente_controller, 'delete'])->name('delete'); // deleta cliente e pet
 // Route::post('/anamneses/pets/{pet_id}/anamneses',[$cliente_controller, 'cadastra'])->name('cadastra');
 
-    //Anamnese
-    Route::prefix('/anamneses')->name('anamnese.')->group(function () {
-        $api_controller = AnamneseController::class;
-        Route::get('/pets/{id}/anamneses',[$api_controller, 'index'])->name('index'); //lista anamneses dos pets
-        Route::post('/{id}/cadastra',[$api_controller, 'cadastra'])->name('cadastra'); // Cadastra as anamneses
-        Route::get('/{id}/detalhe',[$api_controller, 'detalhe'])->name('detalhe'); // abre a anamnese
-    });
+//Anamnese
+$anamneseController = AnamneseController::class;
+Route::get('/anamneses/pets/{petId}/anamneses',[$anamneseController, 'index'])->name('index'); //lista anamneses de 1 pets
+Route::post('/anamneses/pets/{petId}',[$anamneseController, 'cadastra'])->name('cadastra'); // Cadastra as anamneses
+Route::get('/anamneses/anamneses',[$anamneseController, 'lista'])->name('lista'); // lista todas as anamneses
+
 
 
 //Petientes

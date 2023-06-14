@@ -23,7 +23,7 @@ class ClienteListaResource extends JsonResource
             'cidade' => $this->cidade,
             'cep' => $this->cep,
             'casa' => $this->casa,
-            'pet' => PetienteResource::collection([$this->pet]),
+            'pet' => new PetienteResource::($this->pet),
         ];
     }
 }

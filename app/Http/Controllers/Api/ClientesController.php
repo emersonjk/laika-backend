@@ -32,7 +32,6 @@ class ClientesController extends Controller
 
         }catch(\Throwable $th){
             Log::error($th);
-            dd($th);
             return response()->json(
                 $th->getMessage()
                 ,  500);
@@ -70,7 +69,6 @@ class ClientesController extends Controller
 
         } catch (\Throwable $th) {
             DB::rollBack();
-            dd($th);
             return response()->json(
                 $th->getMessage()
                 , 500);
@@ -91,7 +89,6 @@ class ClientesController extends Controller
 
         }catch (\Throwable $th){
             Log::error($th);
-            dd($th);
             return response()->json(
                 $th->getMessage()
                 , 500);

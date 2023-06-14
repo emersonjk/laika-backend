@@ -16,17 +16,16 @@ class ListaAnamneseResource extends JsonResource
     {
         return [
             'id' => $this->id,
-            'cliente' => ClienteResource::collection($this->pet->cliente),
-            'pet' => PetienteResource::collection($this->pet),
-            'pet_id' => $this->pet->id,
-            'motivo' => $this->motivo,
+            'pet' => new PetienteResource($this->pet),
+            'motivoDaConsulta' => $this->motivo,
             'sintomas' => $this->sintomas,
-            'cirurgias_ant' => $this->cirurgias_ant,
-            'doencas_prev' => $this->doencas_prev,
-            'med_em_uso' => $this->med_em_uso,
-            'comport_pet' => $this->comport_pet,
-            'repro_recente' => $this->repro_recente,
+            'cirurgias' => $this->cirurgias_ant,
+            'doencas' => $this->doencas_prev,
+            'medicamentos' => $this->med_em_uso,
+            'comportamento' => $this->comport_pet,
+            'reproducao' => $this->repro_recente,
             'viagem' => $this->viagem,
+            'dataCriacao' => date('d/m', strtotime($this->created_at)),
         ];
     }
 }

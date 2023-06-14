@@ -7,101 +7,106 @@ use App\Http\Resources\AnamneseResource;
 use App\Http\Resources\ListaAnamneseResource;
 use App\Models\Anamnese;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 
 class AnamneseController extends Controller
 {
-    public function index($id)
+    public function index($petId)
     {
         try {
 
-            $anamneses = Anamnese::where('pet_id',$id)->with('pet.cliente')->get();
+            $anamneses = Anamnese::where('pet_id',$petId)->with('pet')->get();
 
-            dd($anamneses, 'comportamento: [\'estressado\',\'Nucio\']');
             if (is_object($anamneses)) {
-                return response()->json([
-                    'error' => false,
-                    'message' => 'Sem erros',
-                    'results' => ['anamneses' => ListaAnamneseResource::collection($anamneses)],
-                ], 200);
+                return response()->json(
+                    ListaAnamneseResource::collection($anamneses)
+                    , 200);
             }else{
-                return response()->json([
-                    'error' => false,
-                    'message' => 'Sem erros',
-                    'results' => ['anamneses' => 'Sem Anamneses Anteriores'],
-                ], 200);
+                return response()->json(
+                    []
+                    ,200
+                );
             }
 
         }catch(\Throwable $th){
             Log::error($th);
-            dd($th);
-            return response()->json([
-                'error' => true,
-                'message' => 'Erro ao listar as anamneses!',
-                'erro_results' => $th->getMessage(),
-            ], 500);
+            return response()->json(
+                $th->getMessage()
+                ,  500);
         }
     }
 
-    public function detalhe($id)
+    public function lista()
     {
 
         try {
 
-            $anamnese = Anamnese::where('id',$id)->get();
+            $anamneses = Anamnese::with('pet')->get();
 
-            return response()->json([
-                'error' => false,
-                'message' => 'Sem erros',
-                'results' => ['anamnese' => AnamneseResource::collection($anamnese)],
-            ], 200);
+            if (is_object($anamneses)) {
+                return response()->json(
+                    ListaAnamneseResource::collection($anamneses)
+                    , 200);
+            }else{
+                return response()->json(
+                    []
+                    ,200
+                );
+            }
 
         }catch (\Throwable $th){
             Log::error($th);
+            return response()->json(
+                $th->getMessage()
+                ,  500);
+        }
+    }
+
+    public function cadastra(Request $request,$petId)
+    {
+        $input =[
+            'pet_id' => $petId,
+            'motivo' => $request['motivoDaConsulta'],
+            'sintomas' => $request['sintomas'],
+            'cirurgias_ant' => $request['cirurgias'],
+            'doencas_prev' => $request['doencas'],
+            'med_em_uso' => $request['medicamentos'],
+            'comport_pet' => $request['comportamento'],
+            'repro_recente' => $request['reproducao'],
+            'viagem' => $request['viagem'],
+        ];
+
+        DB::beginTransaction();
+
+        try {
+
+            $id = Anamnese::create($input);
+
+            $anamnese = Anamnese::with('pet')->where('id',$id->id)->get();
+
+            DB::commit();
+
+            return response()->json(
+                ListaAnamneseResource::collection($anamnese)
+                , 200);
+
+        }catch (\Throwable $th){
+            Log::error($th);
+            DB::rollBack();
             dd($th);
-            return response()->json([
-                'error' => true,
-                'message' => 'Erro ao listar a anamnese!',
-                'erro_results' => $th->getMessage(),
-            ], 500);
+            return response()->json(
+                $th->getMessage()
+                ,  500);
         }
     }
 
-    public function cadastra(Request $request)
-    {
-        $input = $request->all();
-        dd($request,$input);
-        try {
-
-        }catch (\Throwable $th){
-
-        }
-    }
-
-    public function edita(Request $request)
+    /*public function delete(Request $request)
     {
         try {
 
         }catch (\Throwable $th){
 
         }
-    }
-
-    public function update(Request $request)
-    {
-        try {
-
-        }catch (\Throwable $th){
-
-        }
-    }
-
-    public function delete(Request $request)
-    {
-        try {
-
-        }catch (\Throwable $th){
-
-        }
-    }
+    }*/
 }
