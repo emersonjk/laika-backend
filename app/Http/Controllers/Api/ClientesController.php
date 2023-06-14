@@ -39,14 +39,13 @@ class ClientesController extends Controller
     }
     public function cadastra(Request $request)
     {
-        $input = $request->all();
 
-        if (is_string($input)) {
-            $decodedInput = json_decode($input, true);
-            if (json_last_error() === JSON_ERROR_NONE) {
-                $input = $decodedInput;
-            }
+        if ($request['nome']){
+            $input = $request->all();
+        }else{
+            $input = key($request->all());
         }
+
         DB::beginTransaction();
         try {
             $usuario = [
