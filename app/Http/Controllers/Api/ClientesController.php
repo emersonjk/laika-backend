@@ -41,6 +41,12 @@ class ClientesController extends Controller
     {
         $input = $request->all();
 
+        if (is_string($input)) {
+            $decodedInput = json_decode($input, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                $input = $decodedInput;
+            }
+        }
         DB::beginTransaction();
         try {
             $usuario = [

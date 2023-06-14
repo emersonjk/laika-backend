@@ -25,7 +25,7 @@ class ListaAnamneseResource extends JsonResource
             'comportamento' => $this->comport_pet,
             'reproducao' => $this->repro_recente,
             'viagem' => $this->viagem,
-            'dataCriacao' => date('d/m', strtotime($this->created_at)),
+            'dataCriacao' => date('d/m/Y', strtotime($this->created_at)),
         ];
     }
 }
