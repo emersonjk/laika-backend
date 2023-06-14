@@ -40,11 +40,7 @@ class ClientesController extends Controller
     public function cadastra(Request $request)
     {
 
-        if ($request['nome']){
-            $input = $request->all();
-        }else{
-            $input = key($request->all());
-        }
+        $input = $request->all();
 
         DB::beginTransaction();
         try {
