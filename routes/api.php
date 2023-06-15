@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\AnamneseController;
 use App\Http\Controllers\Api\ClientesController;
 use App\Http\Controllers\Api\PetienteController;
+use App\Http\Controllers\Api\ContaController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::get('/anamneses/anamneses',[$anamneseController, 'lista'])->name('lista')
 
 
 //Conta
-$contaController = AnamneseController::class;
+$contaController = ContaController::class;
 Route::get('/conta/{anamneseId}/',[$contaController, 'conta'])->name('conta'); //lista anamneses de 1 pets
 
 
