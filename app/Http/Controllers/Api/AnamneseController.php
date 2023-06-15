@@ -101,12 +101,27 @@ class AnamneseController extends Controller
         }
     }
 
-    /*public function delete(Request $request)
+    public function detalhe($anamneseId)
     {
         try {
+            $anamnese = Anamnese::where('id', $anamneseId)->first();
+
+            if (is_object($anamnese)) {
+                return response()->json(
+                    new ListaAnamneseResource($anamnese)
+                    , 200);
+            }else{
+                return response()->json(
+                    []
+                    ,200
+                );
+            }
 
         }catch (\Throwable $th){
-
+            Log::error($th);
+            return response()->json(
+                $th->getMessage()
+                ,  500);
         }
-    }*/
+    }
 }

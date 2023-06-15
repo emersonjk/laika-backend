@@ -33,9 +33,14 @@ Route::get('/users/delete/{id}',[$cliente_controller, 'delete'])->name('delete')
 //Anamnese
 $anamneseController = AnamneseController::class;
 Route::get('/anamneses/pets/{petId}/anamneses',[$anamneseController, 'index'])->name('index'); //lista anamneses de 1 pets
+Route::get('/anamneses/{anamneseId}',[$anamneseController, 'detalhe'])->name('detalhe'); //lista anamneses de 1 pets
 Route::post('/anamneses/pets/{petId}',[$anamneseController, 'cadastra'])->name('cadastra'); // Cadastra as anamneses
 Route::get('/anamneses/anamneses',[$anamneseController, 'lista'])->name('lista'); // lista todas as anamneses
 
+
+//Conta
+$contaController = AnamneseController::class;
+Route::get('/conta/{anamneseId}/',[$contaController, 'conta'])->name('conta'); //lista anamneses de 1 pets
 
 
 //Petientes
