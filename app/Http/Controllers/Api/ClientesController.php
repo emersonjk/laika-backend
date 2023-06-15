@@ -82,10 +82,10 @@ class ClientesController extends Controller
 
         try {
 
-            $cliente = Cliente::with('pet')->where('id',$id)->get();
+            $cliente = Cliente::with('pet')->where('id',$id)->first();
 
             return response()->json(
-                ClienteListaResource::collection($cliente)
+                new ClienteListaResource($cliente)
                 , 200);
 
         }catch (\Throwable $th){
