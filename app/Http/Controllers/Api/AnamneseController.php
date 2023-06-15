@@ -16,11 +16,11 @@ class AnamneseController extends Controller
     {
         try {
 
-            $anamneses = Anamnese::where('pet_id',$petId)->with('pet')->fisrt();
+            $anamneses = Anamnese::where('pet_id',$petId)->with('pet')->get();
 
             if (is_object($anamneses)) {
                 return response()->json(
-                    new ListaAnamneseResource($anamneses)
+                    ListaAnamneseResource::collection($anamneses)
                     , 200);
             }else{
                 return response()->json(
