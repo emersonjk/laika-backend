@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
+use App\Http\Resources\EspecieListaResource;
 use App\Models\Anamnese;
+use App\Models\Especie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -47,6 +49,27 @@ class ContaController extends Controller
                     ,200
                 );
             }
+
+        } catch (\Throwable $th) {
+            Log::error($th);
+            return response()->json(
+                $th->getMessage()
+                ,  500);
+        }
+    }
+
+    public function especies()
+    {
+        try {
+            $cats = Especie::where("tipo","gato")->orderBy('raca', 'asc')->pluck('raca');
+            $dogs = Especie::where("tipo","cao")->orderBy('raca', 'asc')->pluck('raca');
+
+            $data = [
+                'gato' => $cats,
+                'cao' => $dogs,
+            ];
+
+            return response()->json($data, 200);
 
         } catch (\Throwable $th) {
             Log::error($th);

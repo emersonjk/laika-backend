@@ -42,6 +42,7 @@ Route::get('/anamneses/anamneses',[$anamneseController, 'lista'])->name('lista')
 //Conta
 $contaController = ContaController::class;
 Route::get('/conta/{anamneseId}/',[$contaController, 'conta'])->name('conta'); //lista anamneses de 1 pets
+Route::get('/especies',[$contaController, 'especies'])->name('especies'); //lista especies de caes e gatos
 
 
 //Petientes
