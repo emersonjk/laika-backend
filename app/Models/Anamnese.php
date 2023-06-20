@@ -26,4 +26,9 @@ class Anamnese extends Model
     {
         return $this->belongsTo(Petiente::class,'pet_id');
     }
+
+    public function conta()
+    {
+        return $this->hasMany(Conta::class,'anamnese_id');
+    }
 }

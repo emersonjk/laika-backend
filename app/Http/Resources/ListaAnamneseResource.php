@@ -26,6 +26,7 @@ class ListaAnamneseResource extends JsonResource
             'reproducao' => $this->repro_recente,
             'viagem' => $this->viagem,
             'dataCriacao' => date('d/m/Y', strtotime($this->created_at)),
+            'pre-diagnostico' => ContaResource::collection($this->conta),
         ];
     }
 }
