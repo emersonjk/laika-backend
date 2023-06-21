@@ -41,7 +41,6 @@ class ContaController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
-                dd($response, $anamnese);
                 return $response;
             }else{
                 return response()->json(
