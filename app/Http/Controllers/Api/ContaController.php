@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
 use App\Http\Resources\EspecieListaResource;
+use App\Http\Resources\ListaAnamneseResource;
 use App\Models\Anamnese;
 use App\Models\Especie;
 use Illuminate\Http\Request;
@@ -41,7 +42,23 @@ class ContaController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
-                return $response;
+                $contas = json_decode($response);
+
+                foreach ($contas as $key => $percentual){
+                    Conta::create(array(
+                        'anamnese_id' => $anamnese->id,
+                        'doenca' => $key,
+                        'percentual' => $percentual,
+                    ));
+                }
+
+                $anamnese->with('conta');
+
+
+            return response()->json(
+                new ListaAnamneseResource($anamnese)
+                , 200);
+
             }else{
                 return response()->json(
                     ['error' => 'Anamnese não encontrada']
