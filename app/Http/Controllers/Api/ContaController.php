@@ -3,9 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Controller;
-use App\Http\Resources\EspecieListaResource;
 use App\Http\Resources\ListaAnamneseResource;
 use App\Models\Anamnese;
+use App\Models\Conta;
 use App\Models\Especie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
