@@ -42,7 +42,6 @@ class ContaController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
-                Log::debug(json_decode($response));
                 $contas = json_decode($response);
 
                 $conta = Conta::where("anamnese_id", $anamnese->id)->get();
@@ -60,6 +59,7 @@ class ContaController extends Controller
 
                 $anamnese->with('conta');
 
+                Log::debug($response);
 
             return response()->json(
                 new ListaAnamneseResource($anamnese)
