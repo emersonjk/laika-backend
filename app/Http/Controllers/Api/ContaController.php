@@ -42,6 +42,7 @@ class ContaController extends Controller
                 $response = curl_exec($curl);
                 curl_close($curl);
 
+                Log::debug($response);
                 $contas = json_decode($response);
 
                 $conta = Conta::where("anamnese_id", $anamnese->id)->get();
