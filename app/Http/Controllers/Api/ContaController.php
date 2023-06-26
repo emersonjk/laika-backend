@@ -45,9 +45,11 @@ class ContaController extends Controller
                 $contas = json_decode($response);
 
                 $conta = Conta::where("anamnese_id", $anamnese->id)->get();
-                if (is_object($conta))
-                    $conta->delete();
-
+                if (is_object($conta)){
+                    foreach ($conta as $cont) {
+                        $cont->delete();
+                    }
+                }
 
                 foreach ($contas as $key => $percentual){
                     Conta::create(array(
