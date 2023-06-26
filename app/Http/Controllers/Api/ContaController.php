@@ -61,6 +61,7 @@ class ContaController extends Controller
 
                 $anamnese->with('conta');
 
+                Log::debug($anamnese->sintomas);
                 Log::debug($response);
 
             return response()->json(
