@@ -59,7 +59,9 @@ class ContaController extends Controller
                     ));
                 }
 
-                $anamnese->with('conta');
+                $anamnese->with(['conta' => function ($query) {
+                    $query->orderBy('porcentagem', 'desc')->take(3);
+                }]);
 
                 Log::debug($anamnese->sintomas);
                 Log::debug($response);
