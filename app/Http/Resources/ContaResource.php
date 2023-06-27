@@ -17,7 +17,7 @@ class ContaResource extends JsonResource
         return [
             'id' => $this->id,
             'doenca' => $this->doenca,
-            'porcentagem' => $this->percentual,
+            'porcentagem' => number_format((float)$this->percentual * 100, 2, '.', ''),
         ];
     }
 }

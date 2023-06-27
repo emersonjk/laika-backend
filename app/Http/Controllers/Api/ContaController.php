@@ -50,8 +50,12 @@ class ContaController extends Controller
                         $cont->delete();
                     }
                 }
+                $arrayContas = (array)$contas;
+                arsort($arrayContas);
+                $primeirosValores = array_slice($arrayContas, 0, 3, true);
 
-                foreach ($contas as $key => $percentual){
+
+                foreach ($primeirosValores as $key => $percentual){
                     Conta::create(array(
                         'anamnese_id' => $anamnese->id,
                         'doenca' => $key,
@@ -59,12 +63,12 @@ class ContaController extends Controller
                     ));
                 }
 
-                $anamnese->with(['conta' => function ($query) {
-                    $query->orderBy('porcentagem', 'desc')->take(3);
-                }]);
+                $anamnese->with('conta');
 
                 Log::debug($anamnese->sintomas);
                 Log::debug($response);
+                Log::debug($anamnese->conta);
+
 
             return response()->json(
                 new ListaAnamneseResource($anamnese)
